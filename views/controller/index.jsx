@@ -1,5 +1,6 @@
 import React from "react";
 import BaseComponent from './../components/BaseComponent.jsx';
+import Util from "../helpers/util";
 
 
 export default class Index extends BaseComponent {
@@ -10,7 +11,7 @@ export default class Index extends BaseComponent {
         
         <ul>
           {this.props.budgets.map((b)=>
-            <li><a href={"/"+ this.props.default_view +"/"+b.id}>{b.title}</a></li>
+            <li><a href={Util.site_url(this.props.default_view+"/"+b.id)}>{b.title}</a></li>
           )}
         </ul>
         <div>

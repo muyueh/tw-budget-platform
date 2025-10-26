@@ -48,7 +48,7 @@ export default class Dispatcher extends React.Component {
    //  }
 
     return (
-      <DefaultLayout scripts={comp.renderServerScripts && comp.renderServerScripts()} pageInfo={this.props.pageInfo} title={this.props.pageInfo.title} name={this.props.comp} nav={this.props.nav}>
+      <DefaultLayout basePath={this.props.basePath} scripts={comp.renderServerScripts && comp.renderServerScripts()} pageInfo={this.props.pageInfo} title={this.props.pageInfo.title} name={this.props.comp} nav={this.props.nav}>
       	<div id='react-root' dangerouslySetInnerHTML={{__html:childs}}></div>
         {dev}
         { /* <div dangerouslySetInnerHTML={{__html:this.props.LRScript}}></div> */ }

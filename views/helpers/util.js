@@ -3,24 +3,61 @@ import d3 from "d3";
 import CommentHelper from "./comment.jsx";
 
 
+var getBasePath = function(){
+  if(typeof window !== 'undefined' && window.__BASE_PATH__ != null){
+    return window.__BASE_PATH__;
+  }
+  if(typeof global !== 'undefined' && global.__BASE_PATH__ != null){
+    return global.__BASE_PATH__;
+  }
+  return '';
+};
+
+var resolvePath = function(str){
+  var base = getBasePath() || '';
+  if(base === '/'){
+    base = '';
+  }
+  if(base && base[base.length - 1] === '/'){
+    base = base.slice(0, -1);
+  }
+
+  if(str == null || str === ''){
+    return base || '/';
+  }
+
+  if(typeof str === 'string'){
+    if(/^https?:\/\//.test(str) || str.indexOf('//') === 0){
+      return str;
+    }
+    if(str === '/'){
+      return base || '/';
+    }
+    if(str[0] === '/'){
+      str = str.slice(1);
+    }
+  }
+
+  if(!str){
+    return base || '/';
+  }
+
+  if(base){
+    return base + '/' + str;
+  }
+
+  return '/' + str;
+};
+
 var util = {
   base_url:function(str){
-    if(str && str[0] == "/"){
-      return str;
-    }
-    return "/"+str;
+    return resolvePath(str);
   },
   site_url:function(str){
-    if(str && str[0] == "/"){
-      return str;
-    }
-    return "/"+str;
+    return resolvePath(str);
   },
   asset_url:function(str){
-    if(str && str[0] == "/"){
-      return str;
-    }
-    return "/"+str;
+    return resolvePath(str);
   },
   format_date:function(d){
     var pad = function(num){

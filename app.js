@@ -3,6 +3,8 @@ require("babel/register");
 
 var config = require('./config');
 
+global.__BASE_PATH__ = config.base_path || '';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

@@ -26,11 +26,12 @@ var upload = multer({ dest: '/tmp/' });
 router.get('/', function(req, res, next) {
 
   BudgetModel.getAll(1,1000).then(function(budgets){
-    res.render('dispatch.jsx', 
-    { 
+    res.render('dispatch.jsx',
+    {
       comp:'index',
       layout:'default',
       nav:"home",
+      basePath: Config.base_path || '',
       pageInfo:{
         title:"預算視覺化產生器",
         "ogimage":"",
@@ -55,6 +56,7 @@ router.get('/drilldown/:id', function(req, res, next) {
       layout:'front',
       nav:"home",
       budget_id:budget,
+      basePath: Config.base_path || '',
       pageInfo:data,
       views:{
         budget_links:data.budgets,
@@ -77,6 +79,7 @@ router.get('/bubble/:id', function(req, res, next) {
       layout:'front',
       nav:"home",
       budget_id:budget,
+      basePath: Config.base_path || '',
       pageInfo:data,
       views:{
         budget_links:data.budgets,
@@ -100,6 +103,7 @@ router.get('/bubble-test', function(req, res, next) {
     layout:'front',
     nav:"home",
     budget_id:-1,
+    basePath: Config.base_path || '',
     pageInfo:{},
     views:{
       budget_links:[budget],
@@ -118,6 +122,7 @@ router.get('/radar-test', function(req, res, next) {
     layout:'front',
     nav:"home",
     budget_id:-1,
+    basePath: Config.base_path || '',
     pageInfo:{},
     views:{
     }
@@ -140,6 +145,7 @@ router.get('/table/:id/:type?', function(req, res, next) {
       comp:'table',
       layout:'front',
       nav:"home",
+      basePath: Config.base_path || '',
       pageInfo:data,
       views:{
         _subnav:req.params.type || 'all',
@@ -161,6 +167,7 @@ router.get('/upload', function(req, res, next) {
     comp:'upload',
     layout:'default',
     nav:"upload",
+    basePath: Config.base_path || '',
     pageInfo:{
       title:"預算視覺化平台"
     },

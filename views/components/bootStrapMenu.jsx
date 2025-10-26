@@ -42,7 +42,7 @@ var BootStrapMenu = React.createClass({
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="#">{this.props.name}</a>
+          <a className="navbar-brand" href={util.site_url("")}>{this.props.name}</a>
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">

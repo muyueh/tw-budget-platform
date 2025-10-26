@@ -19,27 +19,29 @@ export default class FrontLayout extends React.Component {
      "   ga('newTracker.send', 'pageview'); ";    
 
     var items = [
-      { 
+      {
         key:"/drilldown/",
-        url:"/drilldown/"+this.props.pageInfo.id,
+        url:util.site_url("drilldown/"+this.props.pageInfo.id),
         label:"鳥瞰圖"
       },
       {
         key:"/bubble/",
-        url:"/bubble/"+this.props.pageInfo.id,
+        url:util.site_url("bubble/"+this.props.pageInfo.id),
         label:"變化圖"
       },
       {
         key:"/table/",
-        url:"/table/"+this.props.pageInfo.id,
+        url:util.site_url("table/"+this.props.pageInfo.id),
         label:"科目預算表格"
       },
       {
         key:"/",
-        url:"/",
+        url:util.site_url(""),
         label:"回所有預算視覺化清單"
       }
     ];
+
+    var basePathScript = "window.__BASE_PATH__ = '" + (this.props.basePath || '') + "';";
 
  return ( 
     <html>
@@ -74,12 +76,13 @@ export default class FrontLayout extends React.Component {
             </div>
           </div>
           
-          <script src="/js/jquery-1.11.3.min.js"></script>
+          <script src={asset_url("js/jquery-1.11.3.min.js")}></script>
 			    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script> 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
           <script src={asset_url("js/radar-chart.js")}></script>
-          <script src={"/resource/controller/"+this.props.name+".js"} ></script>
+          <script dangerouslySetInnerHTML={{__html:basePathScript}}></script>
+          <script src={asset_url("resource/controller/"+this.props.name+".js")} ></script>
           <script dangerouslySetInnerHTML={{__html:GA}}></script>
         </body>
       </html>
