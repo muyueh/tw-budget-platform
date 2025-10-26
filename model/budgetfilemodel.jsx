@@ -1,7 +1,7 @@
 
 
 import budgets from "../budget_list.js";
-import Proimse from "bluebird";
+import Promise from "bluebird";
 
 //       </DefaultLayout>
 
