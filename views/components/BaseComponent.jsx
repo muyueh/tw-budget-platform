@@ -1,5 +1,6 @@
 
 import React from "react";
+import Util from "../helpers/util";
 
 
 export default class BaseComponent extends React.Component {
@@ -26,7 +27,16 @@ export default class BaseComponent extends React.Component {
   }
 
   setUrl(url,title){
-    history.pushState({}, title , url);
+    if(url == null){
+      return;
+    }
+    var target = url;
+    if(url && url[0] == "/"){
+      target = Util.site_url(url.slice(1));
+    }else{
+      target = Util.site_url(url);
+    }
+    history.pushState({}, title , target);
   }
 
   bindKeyEnter(handler,args){

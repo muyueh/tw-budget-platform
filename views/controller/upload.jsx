@@ -1,5 +1,6 @@
 import React from "react";
 import BaseComponent from './../components/BaseComponent.jsx';
+import Util from "../helpers/util";
 
 
 export default class Index extends BaseComponent {
@@ -11,7 +12,7 @@ export default class Index extends BaseComponent {
         <p>請上傳對應的 csv 檔(UTF-8 編碼)，格式欄位請參考 
           <a target="_blank" href="https://docs.google.com/spreadsheets/d/1QijXNn1dLGgXnN__qPFZrBqO1yfFlSOTDCA2wShKDJQ/edit">範例檔案</a>。
         </p>
-        <form action="/uploading" encType='multipart/form-data' method="post">
+        <form action={Util.site_url('uploading')} encType='multipart/form-data' method="post">
           <br />
           <input type="file" name="file" />
           <br />

@@ -12,6 +12,17 @@ var path = require("path");
 
 var fs = require("fs");
 
+var siteConfigModule = require('./config');
+var siteConfig = siteConfigModule.default || siteConfigModule;
+
+var basePath = siteConfig.base_path || '';
+if(basePath === '/'){
+  basePath = '';
+}
+if(basePath && basePath.lastIndexOf('/') === basePath.length - 1){
+  basePath = basePath.slice(0, -1);
+}
+
 function scan(dir){
   var files = fs.readdirSync(dir);
   var res = [];
@@ -92,7 +103,7 @@ var loaders = {
 
 var publicPath = devServer ?
     "http://localhost:9091/resource/" :
-    "/resource/";
+    (basePath ? basePath + "/resource/" : "/resource/");
 var output = {
   path: path.join(__dirname, "public/resource"),
   publicPath: publicPath,
