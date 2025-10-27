@@ -18,23 +18,82 @@ var fs = require("fs");
 var multer  = require('multer');
 var upload = multer({ dest: '/tmp/' });
 
+function normalizeBasePath(basePath) {
+  if (!basePath || basePath === '/') {
+    return '';
+  }
+  var trimmed = basePath.trim();
+  if (trimmed[0] !== '/') {
+    trimmed = '/' + trimmed;
+  }
+  return trimmed.replace(/\/+$/, '');
+}
+
+function buildSitePath(pathname) {
+  var base = normalizeBasePath(Config.base_path);
+  if (!pathname) {
+    return base || '/';
+  }
+  if (pathname[0] !== '/') {
+    pathname = '/' + pathname;
+  }
+  return (base || '') + pathname;
+}
+
+function buildBubblePath(budgetId) {
+  return buildSitePath('bubble/' + budgetId);
+}
+
+function buildListPath() {
+  return buildSitePath('list');
+}
+
+function resolveFeaturedBudgetId() {
+  var configuredId = parseInt(Config.featured_budget_id, 10);
+  if (Number.isNaN(configuredId)) {
+    return null;
+  }
+  return configuredId;
+}
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const configuredId = parseInt(Config.featured_budget_id, 10);
-  const featuredId = Number.isNaN(configuredId) ? 1 : configuredId;
+  var featuredId = resolveFeaturedBudgetId();
+  var budgetPromise = null;
 
-  BudgetModel.get(featuredId).then(function(data){
+  if (featuredId != null) {
+    budgetPromise = BudgetModel.get(featuredId);
+  } else {
+    budgetPromise = BudgetModel.getAll(1, 1).then(function(budgets){
+      if(!budgets || !budgets.length){
+        return null;
+      }
+      var first = budgets[0];
+      var id = first && first.id != null ? first.id : null;
+      if(id == null){
+        return null;
+      }
+      return BudgetModel.get(id);
+    });
+  }
+
+  budgetPromise.then(function(data){
     if(!data){
-      return next();
+      return res.redirect(buildListPath());
     }
+
+    res.redirect(buildBubblePath(data.id));
+  }).catch(next);
+});
+
+router.get('/list', function(req, res, next) {
 
     res.render('dispatch.jsx',
     {
-      comp: data.budget_file_type == "2" ? 'bubble-gov': 'bubble',
-      layout:'front',
-      nav:"home",
-      budget_id:data.id,
+      comp:'index',
+      layout:'default',
+      nav:"list",
       basePath: Config.base_path || '',
       pageInfo:data,
       views:{
@@ -45,17 +104,18 @@ router.get('/', function(req, res, next) {
       }
     });
   }).catch(next);
+
 });
 
 
 router.get('/drilldown/:id', function(req, res, next) {
   var budget = req.params.id;
   BudgetModel.get(budget).then(function(data){
-    res.render('dispatch.jsx', 
-    { 
+    res.render('dispatch.jsx',
+    {
       comp:'drilldown',
       layout:'front',
-      nav:"home",
+      nav:"drilldown",
       budget_id:budget,
       basePath: Config.base_path || '',
       pageInfo:data,
@@ -74,11 +134,11 @@ router.get('/bubble/:id', function(req, res, next) {
   var budget = req.params.id;
   BudgetModel.get(budget).then(function(data){
 
-    res.render('dispatch.jsx', 
-    { 
+    res.render('dispatch.jsx',
+    {
       comp: data.budget_file_type == "2" ? 'bubble-gov': 'bubble',
       layout:'front',
-      nav:"home",
+      nav:"bubble",
       budget_id:budget,
       basePath: Config.base_path || '',
       pageInfo:data,
@@ -141,11 +201,11 @@ router.get('/table/:id/:type?', function(req, res, next) {
   }
 
   BudgetModel.get(budget).then(function(data){
-    res.render('dispatch.jsx', 
-    { 
+    res.render('dispatch.jsx',
+    {
       comp:'table',
       layout:'front',
-      nav:"home",
+      nav:"table",
       basePath: Config.base_path || '',
       pageInfo:data,
       views:{
