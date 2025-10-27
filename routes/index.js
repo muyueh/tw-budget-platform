@@ -89,21 +89,18 @@ router.get('/', function(req, res, next) {
 
 router.get('/list', function(req, res, next) {
 
-  BudgetModel.getAll(1,1000).then(function(budgets){
     res.render('dispatch.jsx',
     {
       comp:'index',
       layout:'default',
       nav:"list",
       basePath: Config.base_path || '',
-      pageInfo:{
-        title:"預算視覺化產生器",
-        "ogimage":"",
-        description:"迅速產生預算視覺化",
-      },
+      pageInfo:data,
       views:{
-        default_view:Config.default_view=="drilldown" ? "drilldown":"bubble",
-        budgets:budgets
+        budget_links:data.budgets,
+        budget_id:data.id,
+        budget_file_type:data.budget_file_type,
+        budget_meta_links:data.meta_links
       }
     });
   }).catch(next);
