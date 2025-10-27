@@ -9,17 +9,23 @@ const STATIC_ASSETS_DIR = path.join(ROOT, 'static-site', 'assets');
 const AppConfig = require(path.join(ROOT, 'config.js'));
 const Config = AppConfig && AppConfig.default ? AppConfig.default : AppConfig;
 function normalizeBasePath(input) {
-  if (!input || input === '/') {
-    return '/';
+  if (!input) {
+    return '';
   }
+
   let base = input.trim();
+
+  if (!base || base === '/' || base === '.' || base === './') {
+    return '';
+  }
+
   if (!base.startsWith('/')) {
-    base = '/' + base;
+    base = `/${base}`;
   }
-  if (base.endsWith('/')) {
-    return base.replace(/\/+$/, '/') || '/';
-  }
-  return base + '/';
+
+  base = base.replace(/\/+$/, '');
+
+  return `${base}/`;
 }
 
 function readBudgetList() {
@@ -88,14 +94,18 @@ function formatDate(dateString) {
 }
 
 function resolveSitePath(basePath, target) {
-  const base = basePath && basePath !== '/' ? basePath : '/';
-  if (!target) {
-    return base;
+  const base = basePath || '';
+  const cleaned = target && target.startsWith('/') ? target.slice(1) : target;
+
+  if (!cleaned) {
+    return base || '';
   }
-  if (target.startsWith('/')) {
-    target = target.slice(1);
+
+  if (!base) {
+    return cleaned;
   }
-  return base.endsWith('/') ? `${base}${target}` : `${base}/${target}`;
+
+  return `${base}${cleaned}`;
 }
 
 function renderIndexHtml({ budgets, basePath }) {
@@ -293,7 +303,7 @@ async function build() {
     }
   }
 
-  const redirectTarget = basePath && basePath !== '/' ? basePath : '/';
+  const redirectTarget = basePath || './';
   const notFoundHtml = `<!DOCTYPE html><html><head><meta charset="utf-8" /><meta http-equiv="refresh" content="0; url=${redirectTarget}" /><title>頁面不存在</title></head><body><p>頁面不存在，將帶您回到<a href="${redirectTarget}">首頁</a>。</p></body></html>`;
   await fs.promises.writeFile(path.join(OUTPUT_DIR, '404.html'), notFoundHtml, 'utf8');
 }

@@ -1,9 +1,9 @@
 function getBasePath() {
   const raw = typeof window !== 'undefined' ? window.__BASE_PATH__ : '';
-  if (!raw || raw === '/') {
-    return '/';
+  if (!raw || raw === '/' || raw === '.' || raw === './') {
+    return '';
   }
-  return raw.replace(/\/+$/, '') + '/';
+  return `${raw.replace(/\/+$/, '')}/`;
 }
 
 export function withBase(path) {
@@ -14,10 +14,14 @@ export function withBase(path) {
   if (/^https?:\/\//i.test(path) || path.startsWith('//')) {
     return path;
   }
-  if (path.startsWith('/')) {
-    path = path.slice(1);
+  let cleaned = path;
+  if (cleaned.startsWith('/')) {
+    cleaned = cleaned.slice(1);
   }
-  return base.endsWith('/') ? `${base}${path}` : `${base}/${path}`;
+  if (!base) {
+    return cleaned;
+  }
+  return `${base}${cleaned}`;
 }
 
 export function readJsonScript(id) {
