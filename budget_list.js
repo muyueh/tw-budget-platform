@@ -7,8 +7,8 @@ export default [
     "ogimage": "http://tpebudget.tonyq.org/img/ogimage.png",
     "description": "快來瞭解台北市 2016 年預算類型、內容！",
     "budgets": [
-      "https://cdn.rawgit.com/tony1223/6a3bee53b175b2d4429f/raw/5e6cffa9d2d6bed87401156c66d3424952a7bf9e/gistfile1.txt",
-      "https://cdn.rawgit.com/tony1223/2cf039240afb660a9886/raw/f4f67bf3591b36ff4e35558b596f5a2168033446/gistfile1.txt"
+      "https://gist.githubusercontent.com/tony1223/6a3bee53b175b2d4429f/raw/5e6cffa9d2d6bed87401156c66d3424952a7bf9e/gistfile1.txt",
+      "https://gist.githubusercontent.com/tony1223/2cf039240afb660a9886/raw/f4f67bf3591b36ff4e35558b596f5a2168033446/gistfile1.txt"
     ],
     "ts": "2015-10-04T06:21:50.164Z",
     "ts_update": "2015-10-04T06:21:50.164Z",
@@ -62,7 +62,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解台中市 2016 年預算類型、內容！",
     "budgets": [
-      "https://cdn.rawgit.com/tony1223/tpe-2016-budget/d40746029c58cbc39fd24a06282d69e86cfdf419/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v.json"
+      "https://raw.githubusercontent.com/tony1223/tpe-2016-budget/d40746029c58cbc39fd24a06282d69e86cfdf419/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v.json"
     ],
     "ts": "2015-10-07T14:23:21.480Z",
     "ts_update": "2015-10-07T14:23:21.480Z",
@@ -80,7 +80,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解台中市研考會 2016 年預算類型、內容！",
     "budgets": [
-      "https://cdn.rawgit.com/tony1223/tpe-2016-budget/7866f031f819846d5d41a59c2e282c51eca26401/output/歲出機關別預算表_研考會_g0v.json"
+      "https://raw.githubusercontent.com/tony1223/tpe-2016-budget/7866f031f819846d5d41a59c2e282c51eca26401/output/歲出機關別預算表_研考會_g0v.json"
     ],
     "ts": "2015-10-07T14:23:21.480Z",
     "ts_update": "2015-10-07T14:23:21.480Z",
@@ -98,7 +98,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解宜蘭縣2016 年預算類型、內容！",
     "budgets": [
-      "https://cdn.rawgit.com/tony1223/tpe-2016-budget/7d0b9fad1dea6fc072faf6b1488290fea9a0b880/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v.json"
+      "https://raw.githubusercontent.com/tony1223/tpe-2016-budget/7d0b9fad1dea6fc072faf6b1488290fea9a0b880/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v.json"
     ],
     "ts": "2015-12-28T06:46:16.170Z",
     "ts_update": "2015-12-28T06:46:16.170Z",
