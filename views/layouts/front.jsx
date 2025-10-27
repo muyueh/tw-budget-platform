@@ -20,23 +20,23 @@ export default class FrontLayout extends React.Component {
 
     var items = [
       {
-        key:"/drilldown/",
+        key:"drilldown",
         url:util.site_url("drilldown/"+this.props.pageInfo.id),
         label:"鳥瞰圖"
       },
       {
-        key:"/bubble/",
+        key:"bubble",
         url:util.site_url("bubble/"+this.props.pageInfo.id),
         label:"變化圖"
       },
       {
-        key:"/table/",
+        key:"table",
         url:util.site_url("table/"+this.props.pageInfo.id),
         label:"科目預算表格"
       },
       {
-        key:"/",
-        url:util.site_url(""),
+        key:"list",
+        url:util.site_url("list"),
         label:"回所有預算視覺化清單"
       }
     ];

@@ -6,6 +6,8 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const OUTPUT_DIR = path.join(ROOT, 'docs');
 const STATIC_ASSETS_DIR = path.join(ROOT, 'static-site', 'assets');
+const AppConfig = require(path.join(ROOT, 'config.js'));
+const Config = AppConfig && AppConfig.default ? AppConfig.default : AppConfig;
 function normalizeBasePath(input) {
   if (!input || input === '/') {
     return '/';
@@ -30,6 +32,20 @@ function readBudgetList() {
   } catch (error) {
     throw new Error(`Unable to parse budget_list.js: ${error.message}`);
   }
+}
+
+function pickFeaturedBudget(budgets) {
+  if (!Array.isArray(budgets) || !budgets.length) {
+    return null;
+  }
+  const configured = parseInt(Config && Config.featured_budget_id, 10);
+  if (!Number.isNaN(configured)) {
+    const matched = budgets.find((budget) => Number(budget.id) === configured);
+    if (matched) {
+      return matched;
+    }
+  }
+  return budgets[0];
 }
 
 async function cleanOutput() {
@@ -126,7 +142,7 @@ function buildNavLinks({ basePath, budgetId }) {
     { key: 'drilldown', label: '鳥瞰圖', href: resolveSitePath(basePath, `drilldown/${budgetId}/`) },
     { key: 'bubble', label: '變化圖', href: resolveSitePath(basePath, `bubble/${budgetId}/`) },
     { key: 'table', label: '科目預算表格', href: resolveSitePath(basePath, `table/${budgetId}/`) },
-    { key: 'index', label: '回清單', href: resolveSitePath(basePath, '') }
+    { key: 'list', label: '回清單', href: resolveSitePath(basePath, 'list/') }
   ];
 }
 
@@ -136,7 +152,7 @@ function renderDetailHtml({ budget, basePath, viewKey, tableKey }) {
   const navLinks = buildNavLinks({ basePath, budgetId: budget.id });
   const navItems = navLinks
     .map((item) => {
-      const active = (viewKey === 'index' && item.key === 'index') || (item.key === viewKey ? ' class="active"' : '');
+      const active = item.key === viewKey ? ' class="active"' : '';
       return `<li${active}><a href="${item.href}">${escapeHtml(item.label)}</a></li>`;
     })
     .join('');
@@ -185,7 +201,7 @@ function renderDetailHtml({ budget, basePath, viewKey, tableKey }) {
       </main>
       <footer class="site-footer">
         <hr />
-        <p>回到<a href="${resolveSitePath(basePath, '')}">預算清單</a>或分享此頁面給有興趣的朋友。</p>
+        <p>回到<a href="${resolveSitePath(basePath, 'list/')}">預算清單</a>或分享此頁面給有興趣的朋友。</p>
       </footer>
     </div>
     <script>${baseScript}</script>
@@ -209,9 +225,21 @@ async function copyDir(src, dest) {
   }
 }
 
+function renderLandingHtml({ budget, basePath }) {
+  if (!budget) {
+    return renderIndexHtml({ budgets: [], basePath });
+  }
+  return renderDetailHtml({
+    budget,
+    basePath,
+    viewKey: 'bubble',
+  });
+}
+
 async function build() {
   const basePath = normalizeBasePath(process.env.BASE_PATH);
   const budgets = readBudgetList();
+  const featuredBudget = pickFeaturedBudget(budgets);
 
   await cleanOutput();
   await ensureDir(OUTPUT_DIR);
@@ -223,8 +251,13 @@ async function build() {
     await copyDir(STATIC_ASSETS_DIR, assetsOutput);
   }
 
-  const indexHtml = renderIndexHtml({ budgets, basePath });
-  await fs.promises.writeFile(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
+  const landingHtml = renderLandingHtml({ budget: featuredBudget, basePath });
+  await fs.promises.writeFile(path.join(OUTPUT_DIR, 'index.html'), landingHtml, 'utf8');
+
+  const listHtml = renderIndexHtml({ budgets, basePath });
+  const listDir = path.join(OUTPUT_DIR, 'list');
+  await ensureDir(listDir);
+  await fs.promises.writeFile(path.join(listDir, 'index.html'), listHtml, 'utf8');
 
   for (const budget of budgets) {
     const detailViews = [

@@ -10,7 +10,8 @@ const config = {
   session_secret: 'static-site-session',
   file_model: true,
   default_view: 'bubble',
-  base_path: '/'
+  base_path: '/',
+  featured_budget_id: 1
 };
 
 module.exports = config;
