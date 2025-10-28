@@ -10,7 +10,7 @@ const config = {
   session_secret: 'static-site-session',
   file_model: true,
   default_view: 'bubble',
-  base_path: '/',
+  base_path: '/tw-budget-platform/',
   featured_budget_id: 1
 };
 

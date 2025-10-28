@@ -259,7 +259,7 @@ function renderLandingHtml({ budget, basePath }) {
 }
 
 async function build() {
-  const basePath = normalizeBasePath(process.env.BASE_PATH);
+  const basePath = normalizeBasePath(process.env.BASE_PATH || Config.base_path);
   const budgets = readBudgetList();
   const featuredBudget = pickFeaturedBudget(budgets);
 
