@@ -4,7 +4,7 @@ export default [
     "id": 1,
     "name": "台北市",
     "title": "台北市 2016 總預算",
-    "ogimage": "http://tpebudget.tonyq.org/img/ogimage.png",
+    "ogimage": "https://tpebudget.tonyq.org/img/ogimage.png",
     "description": "快來瞭解台北市 2016 年預算類型、內容！",
     "budgets": [
       "https://gist.githubusercontent.com/tony1223/6a3bee53b175b2d4429f/raw/5e6cffa9d2d6bed87401156c66d3424952a7bf9e/gistfile1.txt",
@@ -23,10 +23,10 @@ export default [
     "id": 2,
     "name": "高雄市",
     "title": "高雄市 2016 總預算",
-    "ogimage": "http://ksbudget.tonyq.org/img/ogimage.png",
+    "ogimage": "https://ksbudget.tonyq.org/img/ogimage.png",
     "description": "快來瞭解高雄市 2016 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/ks_budget_2016.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/ks_budget_2016.json"
     ],
     "ts": "2015-10-04T06:51:29.977Z",
     "ts_update": "2015-10-04T06:51:29.977Z",
@@ -44,7 +44,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解嘉義縣 2016 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/chaiyi_2016_budget.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/chaiyi_2016_budget.json"
     ],
     "ts": "2015-10-04T14:54:42.804Z",
     "ts_update": "2015-10-04T14:54:42.804Z",
@@ -116,7 +116,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解台北市 2017 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/tpe_2017.csv"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/tpe_2017.csv"
     ],
     "ts": "2016-10-15T21:04:14.078Z",
     "ts_update": "2016-10-15T21:04:14.078Z",
@@ -134,7 +134,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解嘉義縣 2017 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/chaiyi_2017_budget.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/chaiyi_2017_budget.json"
     ],
     "ts": "2016-10-16T02:29:01.030Z",
     "ts_update": "2016-10-16T02:29:01.030Z",
@@ -152,7 +152,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解高雄市 2017 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/ks_budget_2017.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/ks_budget_2017.json"
     ],
     "ts": "2016-10-16T03:11:06.403Z",
     "ts_update": "2016-10-16T03:11:06.403Z",
@@ -170,7 +170,7 @@ export default [
     "ogimage": null,
     "description": "快來瞭解中央政府 2017 年預算類型、內容！",
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/files/gov_budget_2017.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/files/gov_budget_2017.json"
     ],
     "ts": "2016-10-16T06:31:28.953Z",
     "ts_update": "2016-10-16T06:31:28.953Z",
@@ -188,7 +188,7 @@ export default [
     "ogimage": null,
     "description": null,
     "budgets": [
-      "http://budget.tonyqstatic.org.s3.amazonaws.com/cli/budget_2601.json"
+      "https://budget.tonyqstatic.org.s3.amazonaws.com/cli/budget_2601.json"
     ],
     "ts": "2016-10-16T22:00:49.272Z",
     "ts_update": "2016-10-16T22:00:49.272Z",
