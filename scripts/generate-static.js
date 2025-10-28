@@ -28,6 +28,18 @@ function normalizeBasePath(input) {
   return `${base}/`;
 }
 
+function resolveAssetPath(basePath, assetPath) {
+  if (!assetPath) {
+    return basePath || '/';
+  }
+
+  if (!basePath) {
+    return `/${assetPath.replace(/^\/+/, '')}`;
+  }
+
+  return `${basePath}${assetPath.replace(/^\/+/, '')}`;
+}
+
 function readBudgetList() {
   const filePath = path.join(ROOT, 'budget_list.js');
   const source = fs.readFileSync(filePath, 'utf8');
@@ -98,11 +110,11 @@ function resolveSitePath(basePath, target) {
   const cleaned = target && target.startsWith('/') ? target.slice(1) : target;
 
   if (!cleaned) {
-    return base || '';
+    return base || '/';
   }
 
   if (!base) {
-    return cleaned;
+    return `/${cleaned}`;
   }
 
   return `${base}${cleaned}`;
@@ -120,7 +132,7 @@ function renderIndexHtml({ budgets, basePath }) {
     <meta name="description" content="瀏覽並分享台灣各地政府的預算視覺化成果" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" href="${basePath}assets/css/site.css" />
+    <link rel="stylesheet" href="${resolveAssetPath(basePath, 'assets/css/site.css')}" />
   </head>
   <body>
     <div class="container" data-role="index-view">
@@ -142,7 +154,7 @@ function renderIndexHtml({ budgets, basePath }) {
     </div>
     <script>${baseScript}</script>
     <script id="budget-data" type="application/json">${serialized}</script>
-    <script type="module" src="${basePath}assets/js/index.js"></script>
+    <script type="module" src="${resolveAssetPath(basePath, 'assets/js/index.js')}"></script>
   </body>
 </html>`;
 }
@@ -194,7 +206,7 @@ function renderDetailHtml({ budget, basePath, viewKey, tableKey }) {
     <meta name="description" content="${escapeHtml(budget.description || '')}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" href="${basePath}assets/css/site.css" />
+    <link rel="stylesheet" href="${resolveAssetPath(basePath, 'assets/css/site.css')}" />
   </head>
   <body>
     <div class="container" data-role="budget-detail" data-view="${viewKey}${tableKey ? `:${tableKey}` : ''}">
@@ -216,7 +228,7 @@ function renderDetailHtml({ budget, basePath, viewKey, tableKey }) {
     </div>
     <script>${baseScript}</script>
     <script id="budget-data" type="application/json">${serialized}</script>
-    <script type="module" src="${basePath}assets/js/detail.js"></script>
+    <script type="module" src="${resolveAssetPath(basePath, 'assets/js/detail.js')}"></script>
   </body>
 </html>`;
 }
