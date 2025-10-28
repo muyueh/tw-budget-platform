@@ -1,15 +1,29 @@
 function getBasePath() {
-  const raw = typeof window !== 'undefined' ? window.__BASE_PATH__ : '';
-  if (!raw || raw === '/' || raw === '.' || raw === './') {
+  if (typeof window === 'undefined') {
     return '';
   }
-  return `${raw.replace(/\/+$/, '')}/`;
+
+  const raw = window.__BASE_PATH__;
+  if (!raw || raw === '.' || raw === './') {
+    return '';
+  }
+
+  if (raw === '/') {
+    return '/';
+  }
+
+  const trimmed = raw.replace(/\/+$/, '');
+  if (!trimmed) {
+    return '';
+  }
+
+  return `${trimmed}/`;
 }
 
 export function withBase(path) {
   const base = getBasePath();
   if (!path) {
-    return base;
+    return base || '/';
   }
   if (/^https?:\/\//i.test(path) || path.startsWith('//')) {
     return path;
@@ -18,10 +32,12 @@ export function withBase(path) {
   if (cleaned.startsWith('/')) {
     cleaned = cleaned.slice(1);
   }
-  if (!base) {
-    return cleaned;
+
+  if (base && base !== '/') {
+    return `${base}${cleaned}`;
   }
-  return `${base}${cleaned}`;
+
+  return `/${cleaned}`;
 }
 
 export function readJsonScript(id) {
