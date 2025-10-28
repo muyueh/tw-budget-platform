@@ -1,0 +1,42 @@
+[
+  {
+    "code": "J10",
+    "topname": "教育",
+    "depname": "教育處",
+    "name": "智慧教室推動",
+    "budget": 6100000000,
+    "last_amount": 5900000000
+  },
+  {
+    "code": "J20",
+    "topname": "社會福利",
+    "depname": "社會處",
+    "name": "兒童托育整合",
+    "budget": 3400000000,
+    "last_amount": 3300000000
+  },
+  {
+    "code": "J30",
+    "topname": "農業",
+    "depname": "農業處",
+    "name": "農產品冷鏈",
+    "budget": 2400000000,
+    "last_amount": 2300000000
+  },
+  {
+    "code": "J40",
+    "topname": "建設",
+    "depname": "工務處",
+    "name": "市區排水改善",
+    "budget": 1800000000,
+    "last_amount": 1700000000
+  },
+  {
+    "code": "J50",
+    "topname": "交通",
+    "depname": "交通處",
+    "name": "公共運輸升級",
+    "budget": 1200000000,
+    "last_amount": 1100000000
+  }
+]

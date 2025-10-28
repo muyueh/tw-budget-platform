@@ -1,0 +1,42 @@
+[
+  {
+    "code": "K01",
+    "topname": "教育",
+    "depname": "教育局",
+    "name": "雙語教育推廣",
+    "budget": 32800000000,
+    "last_amount": 31200000000
+  },
+  {
+    "code": "K02",
+    "topname": "社會福利",
+    "depname": "社會局",
+    "name": "社會福利整合服務",
+    "budget": 23500000000,
+    "last_amount": 22600000000
+  },
+  {
+    "code": "K03",
+    "topname": "交通",
+    "depname": "交通局",
+    "name": "捷運與輕軌營運",
+    "budget": 11200000000,
+    "last_amount": 9800000000
+  },
+  {
+    "code": "K04",
+    "topname": "建設",
+    "depname": "工務局",
+    "name": "水環境改善",
+    "budget": 8600000000,
+    "last_amount": 7200000000
+  },
+  {
+    "code": "K05",
+    "topname": "環境保護",
+    "depname": "環保局",
+    "name": "智慧環保管理",
+    "budget": 4600000000,
+    "last_amount": 4100000000
+  }
+]

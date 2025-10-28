@@ -1,0 +1,42 @@
+[
+  {
+    "code": "E11",
+    "topname": "教育",
+    "depname": "教育局",
+    "name": "市立學校改善",
+    "budget": 26800000000,
+    "last_amount": 26000000000
+  },
+  {
+    "code": "E21",
+    "topname": "社會福利",
+    "depname": "社會局",
+    "name": "身障福利補助",
+    "budget": 12500000000,
+    "last_amount": 12000000000
+  },
+  {
+    "code": "E31",
+    "topname": "建設",
+    "depname": "建設局",
+    "name": "捷運與公共運輸",
+    "budget": 18200000000,
+    "last_amount": 17500000000
+  },
+  {
+    "code": "E41",
+    "topname": "農業",
+    "depname": "農業局",
+    "name": "農村再生計畫",
+    "budget": 5600000000,
+    "last_amount": 5400000000
+  },
+  {
+    "code": "E51",
+    "topname": "環境保護",
+    "depname": "環保局",
+    "name": "空污防制",
+    "budget": 4300000000,
+    "last_amount": 4200000000
+  }
+]

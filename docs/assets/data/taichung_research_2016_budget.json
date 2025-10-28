@@ -1,0 +1,34 @@
+[
+  {
+    "code": "RC01",
+    "topname": "研考會",
+    "depname": "行政管理組",
+    "name": "政策研究計畫",
+    "budget": 82000000,
+    "last_amount": 78000000
+  },
+  {
+    "code": "RC02",
+    "topname": "研考會",
+    "depname": "資訊管理組",
+    "name": "資料開放平台",
+    "budget": 36000000,
+    "last_amount": 34000000
+  },
+  {
+    "code": "RC03",
+    "topname": "研考會",
+    "depname": "評估督導組",
+    "name": "績效評估系統",
+    "budget": 27000000,
+    "last_amount": 25000000
+  },
+  {
+    "code": "RC04",
+    "topname": "研考會",
+    "depname": "國際合作組",
+    "name": "城市外交與交流",
+    "budget": 19000000,
+    "last_amount": 18000000
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "code": "Y01",
+    "topname": "教育",
+    "depname": "教育處",
+    "name": "偏鄉教育支持",
+    "budget": 4300000000,
+    "last_amount": 4200000000
+  },
+  {
+    "code": "Y02",
+    "topname": "社福",
+    "depname": "社會處",
+    "name": "社區關懷據點",
+    "budget": 2100000000,
+    "last_amount": 2050000000
+  },
+  {
+    "code": "Y03",
+    "topname": "農業",
+    "depname": "農業處",
+    "name": "有機農業推廣",
+    "budget": 1500000000,
+    "last_amount": 1450000000
+  },
+  {
+    "code": "Y04",
+    "topname": "觀光",
+    "depname": "觀光處",
+    "name": "觀光景點提升",
+    "budget": 1200000000,
+    "last_amount": 1150000000
+  },
+  {
+    "code": "Y05",
+    "topname": "環保",
+    "depname": "環保局",
+    "name": "綠色交通建設",
+    "budget": 860000000,
+    "last_amount": 830000000
+  }
+]

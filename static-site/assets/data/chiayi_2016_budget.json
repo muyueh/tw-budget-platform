@@ -1,0 +1,42 @@
+[
+  {
+    "code": "A10",
+    "topname": "教育",
+    "depname": "教育處",
+    "name": "國中小教育",
+    "budget": 5800000000,
+    "last_amount": 5600000000
+  },
+  {
+    "code": "A20",
+    "topname": "社會福利",
+    "depname": "社會處",
+    "name": "老人福利津貼",
+    "budget": 3200000000,
+    "last_amount": 3100000000
+  },
+  {
+    "code": "B30",
+    "topname": "農業",
+    "depname": "農業處",
+    "name": "農業設施改善",
+    "budget": 2100000000,
+    "last_amount": 2000000000
+  },
+  {
+    "code": "C40",
+    "topname": "建設",
+    "depname": "工務處",
+    "name": "鄉道改善",
+    "budget": 1500000000,
+    "last_amount": 1400000000
+  },
+  {
+    "code": "D50",
+    "topname": "環保",
+    "depname": "環保局",
+    "name": "資源回收與清潔",
+    "budget": 900000000,
+    "last_amount": 870000000
+  }
+]

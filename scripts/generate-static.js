@@ -120,8 +120,37 @@ function resolveSitePath(basePath, target) {
   return `${base}${cleaned}`;
 }
 
+function prepareBudgetForSite(budget, basePath) {
+  if (!budget || typeof budget !== 'object') {
+    return budget;
+  }
+
+  const normalized = Object.assign({}, budget);
+  if (Array.isArray(normalized.budgets)) {
+    normalized.budgets = normalized.budgets.map((entry) => {
+      if (typeof entry !== 'string') {
+        return entry;
+      }
+
+      const trimmed = entry.trim();
+      if (!trimmed) {
+        return trimmed;
+      }
+
+      if (/^(https?:)?\/\//i.test(trimmed)) {
+        return trimmed;
+      }
+
+      return resolveSitePath(basePath, trimmed);
+    });
+  }
+
+  return normalized;
+}
+
 function renderIndexHtml({ budgets, basePath }) {
-  const serialized = serializeForScript(budgets);
+  const prepared = Array.isArray(budgets) ? budgets.map((budget) => prepareBudgetForSite(budget, basePath)) : [];
+  const serialized = serializeForScript(prepared);
   const baseScript = `window.__BASE_PATH__ = '${serializeBasePath(basePath)}';`;
   return `<!DOCTYPE html>
 <html lang="zh-Hant">
@@ -169,7 +198,8 @@ function buildNavLinks({ basePath, budgetId }) {
 }
 
 function renderDetailHtml({ budget, basePath, viewKey, tableKey }) {
-  const serialized = serializeForScript(budget);
+  const preparedBudget = prepareBudgetForSite(budget, basePath);
+  const serialized = serializeForScript(preparedBudget);
   const baseScript = `window.__BASE_PATH__ = '${serializeBasePath(basePath)}';`;
   const navLinks = buildNavLinks({ basePath, budgetId: budget.id });
   const navItems = navLinks
