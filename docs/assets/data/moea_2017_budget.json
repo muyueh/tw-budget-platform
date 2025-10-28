@@ -1,0 +1,42 @@
+[
+  {
+    "code": "M101",
+    "topname": "經濟部",
+    "depname": "工業局",
+    "name": "智慧製造升級",
+    "budget": 18500000000,
+    "last_amount": 17800000000
+  },
+  {
+    "code": "M102",
+    "topname": "經濟部",
+    "depname": "商業司",
+    "name": "中小企業創新補助",
+    "budget": 9200000000,
+    "last_amount": 8800000000
+  },
+  {
+    "code": "M103",
+    "topname": "經濟部",
+    "depname": "能源局",
+    "name": "再生能源推廣",
+    "budget": 13200000000,
+    "last_amount": 12600000000
+  },
+  {
+    "code": "M104",
+    "topname": "經濟部",
+    "depname": "工業局",
+    "name": "產業園區更新",
+    "budget": 7600000000,
+    "last_amount": 7200000000
+  },
+  {
+    "code": "M105",
+    "topname": "經濟部",
+    "depname": "國際貿易局",
+    "name": "國際市場拓銷",
+    "budget": 5400000000,
+    "last_amount": 5200000000
+  }
+]

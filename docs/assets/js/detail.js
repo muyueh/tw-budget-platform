@@ -4,6 +4,60 @@ import { readJsonScript, createElement, buildExternalLink, formatNumber } from '
 const root = document.querySelector('[data-role="budget-detail"]');
 const budget = readJsonScript('budget-data');
 
+const HTTPS_UPGRADE_HOSTS = new Set(['budget.tonyqstatic.org.s3.amazonaws.com']);
+
+function logGroupStart(label, ...args) {
+  if (typeof console !== 'undefined') {
+    if (typeof console.groupCollapsed === 'function') {
+      console.groupCollapsed(label, ...args);
+      return;
+    }
+    if (typeof console.log === 'function') {
+      console.log(label, ...args);
+    }
+  }
+}
+
+function logGroupEnd() {
+  if (typeof console !== 'undefined' && typeof console.groupEnd === 'function') {
+    console.groupEnd();
+  }
+}
+
+function normalizeDatasetUrl(url) {
+  if (typeof url !== 'string') {
+    return null;
+  }
+
+  const trimmed = url.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(trimmed, window.location.href);
+    if (parsed.protocol === 'http:' && HTTPS_UPGRADE_HOSTS.has(parsed.hostname)) {
+      parsed.protocol = 'https:';
+      const normalized = parsed.toString();
+      if (typeof console !== 'undefined' && typeof console.info === 'function') {
+        console.info('Upgraded dataset URL to HTTPS', { from: trimmed, to: normalized });
+      }
+      return normalized;
+    }
+    if (parsed.protocol === 'http:' && window.location.protocol === 'https:' && typeof console !== 'undefined') {
+      if (typeof console.warn === 'function') {
+        console.warn('Dataset URL uses HTTP and may be blocked by the browser', trimmed);
+      }
+    }
+    return parsed.toString();
+  } catch (error) {
+    if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+      console.warn('Invalid dataset URL', url, error);
+    }
+    return null;
+  }
+}
+
 if (!root || !budget) {
   console.warn('Budget detail payload missing');
 } else {
@@ -234,15 +288,43 @@ async function summarizeDataset(url) {
   }
 }
 
+function summarizeDatasetPayload(payload) {
+  if (!payload) {
+    return { entries: 0, type: 'empty', sampleKeys: [] };
+  }
+
+  const rows = Array.isArray(payload) ? payload : extractRows(payload);
+  const count = Array.isArray(rows) ? rows.length : 0;
+  const sampleKeys = count && rows[0] && typeof rows[0] === 'object' ? Object.keys(rows[0]).slice(0, 6) : [];
+
+  return {
+    entries: count,
+    type: Array.isArray(payload) ? 'array' : typeof payload,
+    sampleKeys,
+  };
+}
+
 async function loadAndRenderVisualization(container, statusElement, budget, viewKey) {
   if (!container || !statusElement || !budget) {
     return;
   }
 
+  const label = budget.title || budget.name || `budget-${budget.id || ''}`;
+  logGroupStart('[budget] render visualization', label);
+  if (typeof console !== 'undefined' && typeof console.log === 'function') {
+    console.log('[budget] rendering view', { viewKey, budgetId: budget.id, title: budget.title || budget.name });
+  }
+
   try {
-    const entries = await loadBudgetEntries(budget, viewKey);
+    const { entries, summaries } = await loadBudgetEntries(budget, viewKey);
+    if (typeof console !== 'undefined' && typeof console.log === 'function') {
+      console.log('[budget] dataset summaries', summaries);
+    }
+
     if (!entries.length) {
       statusElement.textContent = '找不到可視覺化的預算資料。';
+      statusElement.classList.remove('text-muted');
+      statusElement.style.color = '#c0392b';
       return;
     }
 
@@ -252,34 +334,73 @@ async function loadAndRenderVisualization(container, statusElement, budget, view
     } else {
       statusElement.textContent = `共 ${totalEntries} 筆資料，總金額約為 ${formatNumber(Math.round(overallAmount))} 元。`;
     }
+
+    statusElement.classList.remove('text-muted');
+    statusElement.style.color = '';
+
+    if (typeof console !== 'undefined' && typeof console.log === 'function') {
+      console.log('[budget] rendered visualization', {
+        renderedCount,
+        totalEntries,
+        overallAmount,
+        viewKey,
+      });
+    }
   } catch (error) {
     console.warn('Failed to render visualization', error);
     statusElement.textContent = '目前無法載入圖表，請改為下載資料檔案。';
     statusElement.classList.remove('text-muted');
     statusElement.style.color = '#c0392b';
+  } finally {
+    logGroupEnd();
   }
 }
 
 async function loadBudgetEntries(budget, viewKey) {
-  const urls = Array.isArray(budget.budgets) ? budget.budgets : [];
-  if (!urls.length) {
-    return [];
+  const rawUrls = Array.isArray(budget.budgets) ? budget.budgets : [];
+  if (!rawUrls.length) {
+    return { entries: [], urls: [], summaries: [] };
+  }
+
+  const normalizedUrls = rawUrls
+    .map((url) => normalizeDatasetUrl(url))
+    .filter((url) => typeof url === 'string' && url.length);
+
+  if (typeof console !== 'undefined' && typeof console.log === 'function') {
+    console.log('[budget] normalized dataset URLs', { raw: rawUrls, normalized: normalizedUrls, viewKey });
+  }
+
+  if (!normalizedUrls.length) {
+    return { entries: [], urls: [], summaries: [] };
   }
 
   const typeHint = budget.budget_file_type != null ? String(budget.budget_file_type) : null;
+  const summaries = [];
   const datasets = await Promise.all(
-    urls.map((url) =>
-      fetchBudgetDataset(url, typeHint)
-        .then((data) => data)
+    normalizedUrls.map((url, index) => {
+      if (typeof console !== 'undefined' && typeof console.log === 'function') {
+        console.log('[budget] fetching dataset', { index: index + 1, url, viewKey });
+      }
+
+      return fetchBudgetDataset(url, typeHint)
+        .then((data) => {
+          const summary = summarizeDatasetPayload(data);
+          summaries.push(Object.assign({ url }, summary));
+          if (typeof console !== 'undefined' && typeof console.log === 'function') {
+            console.log('[budget] fetched dataset', { url, summary });
+          }
+          return data;
+        })
         .catch((error) => {
           console.warn('Failed to fetch dataset', url, error);
+          summaries.push({ url, error: error && error.message ? error.message : String(error) });
           return null;
-        }),
-    ),
+        });
+    }),
   );
 
   const merged = mergeBudgetDatasets(datasets.filter(Boolean));
-  return merged;
+  return { entries: merged, urls: normalizedUrls, summaries };
 }
 
 async function fetchBudgetDataset(url, typeHint) {

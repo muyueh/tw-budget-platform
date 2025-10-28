@@ -1,0 +1,42 @@
+[
+  {
+    "code": "G1001",
+    "topname": "教育",
+    "depname": "教育部",
+    "name": "十二年國教推動",
+    "budget": 198000000000,
+    "last_amount": 190000000000
+  },
+  {
+    "code": "G2002",
+    "topname": "社會福利",
+    "depname": "衛福部",
+    "name": "長照2.0服務",
+    "budget": 152000000000,
+    "last_amount": 146000000000
+  },
+  {
+    "code": "G3003",
+    "topname": "國防",
+    "depname": "國防部",
+    "name": "國防自主計畫",
+    "budget": 324000000000,
+    "last_amount": 310000000000
+  },
+  {
+    "code": "G4004",
+    "topname": "交通建設",
+    "depname": "交通部",
+    "name": "前瞻基礎建設",
+    "budget": 265000000000,
+    "last_amount": 250000000000
+  },
+  {
+    "code": "G5005",
+    "topname": "經濟發展",
+    "depname": "經濟部",
+    "name": "產業創新轉型",
+    "budget": 138000000000,
+    "last_amount": 132000000000
+  }
+]

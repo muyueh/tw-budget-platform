@@ -1,0 +1,42 @@
+[
+  {
+    "code": "A01",
+    "topname": "教育",
+    "depname": "教育局",
+    "name": "國民教育支出",
+    "budget": 31200000000,
+    "last_amount": 30000000000
+  },
+  {
+    "code": "A02",
+    "topname": "社福",
+    "depname": "社會局",
+    "name": "長照與福利服務",
+    "budget": 22600000000,
+    "last_amount": 22000000000
+  },
+  {
+    "code": "B03",
+    "topname": "經濟",
+    "depname": "交通局",
+    "name": "大眾運輸改善",
+    "budget": 9800000000,
+    "last_amount": 9500000000
+  },
+  {
+    "code": "C04",
+    "topname": "建設",
+    "depname": "工務局",
+    "name": "道路養護",
+    "budget": 7200000000,
+    "last_amount": 6900000000
+  },
+  {
+    "code": "D05",
+    "topname": "環保",
+    "depname": "環保局",
+    "name": "污染防治",
+    "budget": 4100000000,
+    "last_amount": 3980000000
+  }
+]

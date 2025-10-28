@@ -1,0 +1,47 @@
+[
+  {
+    "code": "E5101",
+    "topname": "公共建設",
+    "depname": "工務局",
+    "name": "道路與橋梁維護",
+    "budget": 15200000000,
+    "last_amount": 14900000000,
+    "comment": "改善市區道路品質"
+  },
+  {
+    "code": "E5203",
+    "topname": "公共建設",
+    "depname": "水利處",
+    "name": "防洪治水工程",
+    "budget": 8800000000,
+    "last_amount": 8600000000,
+    "comment": "流域整治與排水改善"
+  },
+  {
+    "code": "F6102",
+    "topname": "公共建設",
+    "depname": "捷運局",
+    "name": "捷運路網延伸",
+    "budget": 20500000000,
+    "last_amount": 19800000000,
+    "comment": "東環段施工與設備購置"
+  },
+  {
+    "code": "G7104",
+    "topname": "民生服務",
+    "depname": "市場處",
+    "name": "傳統市場改善",
+    "budget": 3200000000,
+    "last_amount": 3000000000,
+    "comment": "攤販更新與消防安全"
+  },
+  {
+    "code": "H8101",
+    "topname": "文化觀光",
+    "depname": "觀傳局",
+    "name": "城市行銷與國際活動",
+    "budget": 2700000000,
+    "last_amount": 2500000000,
+    "comment": "觀光推廣與大型活動"
+  }
+]

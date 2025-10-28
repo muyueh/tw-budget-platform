@@ -1,0 +1,47 @@
+[
+  {
+    "code": "A1101",
+    "topname": "一般政務",
+    "depname": "教育局",
+    "name": "教育支出",
+    "budget": 42500000000,
+    "last_amount": 41000000000,
+    "comment": "包含義務教育與補助款"
+  },
+  {
+    "code": "A1302",
+    "topname": "一般政務",
+    "depname": "社會局",
+    "name": "社會福利服務",
+    "budget": 23800000000,
+    "last_amount": 22950000000,
+    "comment": "老人與身心障礙照顧計畫"
+  },
+  {
+    "code": "B2105",
+    "topname": "經濟發展",
+    "depname": "交通局",
+    "name": "交通建設投資",
+    "budget": 19800000000,
+    "last_amount": 19000000000,
+    "comment": "捷運系統與道路改善"
+  },
+  {
+    "code": "C3101",
+    "topname": "環境保護",
+    "depname": "環保局",
+    "name": "空氣與水質維護",
+    "budget": 7200000000,
+    "last_amount": 7000000000,
+    "comment": "減碳與水資源管理"
+  },
+  {
+    "code": "D4102",
+    "topname": "教育科學",
+    "depname": "教育局",
+    "name": "校園更新計畫",
+    "budget": 5600000000,
+    "last_amount": 5400000000,
+    "comment": "教室整建與數位學習"
+  }
+]
