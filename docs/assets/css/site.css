@@ -116,6 +116,42 @@ body {
   font-weight: 600;
 }
 
+.viz-placeholder {
+  width: 100%;
+  min-height: 360px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.viz-status {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.bubble-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bubble-label,
+.bubble-value {
+  fill: #fff;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.bubble-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bubble-value {
+  font-size: 12px;
+  font-weight: 600;
+  fill: rgba(255, 255, 255, 0.9);
+}
+
 @media (max-width: 767px) {
   .page-header {
     margin-top: 25px;
@@ -123,5 +159,17 @@ body {
 
   .budget-card .panel {
     min-height: auto;
+  }
+
+  .viz-placeholder {
+    min-height: 300px;
+  }
+
+  .bubble-label {
+    font-size: 11px;
+  }
+
+  .bubble-value {
+    font-size: 11px;
   }
 }
